@@ -21,8 +21,8 @@ round-avatar: true
 # --- Social Profiles (Footer Links) ---
 social-network-links:
   github: "debarshikundu"
-  # linkedin: "your-linkedin-id"
-  # email: "your-email@example.com"
+  linkedin: "debarshi-kundu-19145636"
+  email: "debarshikundu0@utexas.edu"
 
 # --- Jekyll & Build Settings ---
 markdown: kramdown
