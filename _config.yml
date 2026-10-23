@@ -1,7 +1,8 @@
 # --- Site Info ---
 title: "Debarshi Kundu"
 author: "Debarshi Kundu"
-description: "Personal website & technical blog."
+description: "CS student, programmer, and security enthusiast. Projects, CTF writeups, and lab notes."
+title-on-all-pages: true
 
 # --- Custom Domain Settings ---
 url: "https://www.autistictechboy.tech"
@@ -9,8 +10,12 @@ baseurl: ""
 
 # --- Navigation Bar Links ---
 navbar-links:
+  Home: "/"
+  Projects: "projects"
+  Writeups: "writeups"
   About: "aboutme"
-  Posts: "index"
+  Uses: "uses"
+  Résumé: "resume"
 
 # --- Avatar & Header Image ---
 # Place an image file in assets/img/ to update this icon
@@ -24,9 +29,47 @@ social-network-links:
   linkedin: "debarshi-kundu-19145636"
   email: "debarshikundu0@utexas.edu"
 
+# --- Theme colours (dark, terminal-inspired) ---
+page-col: "#0d1117"
+text-col: "#c9d1d9"
+link-col: "#58a6ff"
+hover-col: "#3ddc97"
+navbar-col: "#0b0f14"
+navbar-text-col: "#e6edf3"
+navbar-border-col: "#1f2937"
+footer-col: "#0b0f14"
+footer-text-col: "#8b949e"
+footer-link-col: "#c9d1d9"
+footer-hover-col: "#3ddc97"
+mobile-theme-col: "#0d1117"
+
+# --- Custom stylesheet ---
+site-css:
+  - "/assets/css/custom.css"
+
+# --- Content ---
+excerpt_length: 40
+date_format: "%b %-d, %Y"
+rss-description: "Projects, CTF writeups, and lab notes from Debarshi Kundu."
+keywords: "Debarshi Kundu, portfolio, computer science, cybersecurity, CTF, programming, projects"
+url-pretty: "autistictechboy.tech"
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+
 # --- Jekyll & Build Settings ---
 markdown: kramdown
 highlighter: rouge
+timezone: America/Chicago
 
 # Exclude unneeded local files from build
 exclude:

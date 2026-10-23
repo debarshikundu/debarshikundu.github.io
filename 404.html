@@ -1,13 +1,24 @@
 ---
 layout: default
-title: 404 - Page not found
+title: 404 — Page not found
 permalink: /404.html
 ---
 
-<div class="text-center">
-  <h1>Whoops, this page doesn't exist.</h1>
-  <h1>Move along. (404 error)</h1>
-  <br/>
+<div class="not-found">
+  <p class="section-label">// error 404</p>
+  <h1>Segmentation fault (core dumped)</h1>
+  <p class="not-found-text">
+    The page you asked for doesn't exist. Either the URL is wrong, or I moved something
+    and forgot to leave a redirect.
+  </p>
 
-  <img src="{{ 'assets/img/404-southpark.jpg' | relative_url }}" alt="Not found" />
+  <div class="not-found-paths">
+    <p class="section-label">// try one of these</p>
+    <ul class="not-found-links">
+      <li><a href="{{ '/' | relative_url }}"><i class="fas fa-house" aria-hidden="true"></i> Home</a></li>
+      <li><a href="{{ '/projects' | relative_url }}"><i class="fas fa-folder-open" aria-hidden="true"></i> Projects</a></li>
+      <li><a href="{{ '/writeups' | relative_url }}"><i class="fas fa-terminal" aria-hidden="true"></i> Writeups</a></li>
+      <li><a href="{{ '/aboutme' | relative_url }}"><i class="fas fa-user" aria-hidden="true"></i> About</a></li>
+    </ul>
+  </div>
 </div>

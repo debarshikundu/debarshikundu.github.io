@@ -1,122 +1,158 @@
 ---
-layout: page
+layout: base
 ---
 
-{{ content }}
+<main class="home-main">
+  <section class="hero">
+    <div class="container-md">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10">
+          <p class="hero-prompt">{{ page.hero.prompt | default: "$ whoami" }}</p>
+          <h1 class="hero-title">{{ page.hero.title | default: site.author }}</h1>
 
-{% assign posts = paginator.posts | default: site.posts %}
-
-<!-- role="list" needed so that `list-style: none` in Safari doesn't remove the list semantics -->
-<ul class="posts-list list-unstyled" role="list">
-  {% for post in posts %}
-  <li class="post-preview">
-    <article>
-
-      {%- capture thumbnail -%}
-        {% if post.thumbnail-img %}
-          {{ post.thumbnail-img }}
-        {% elsif post.cover-img %}
-          {% if post.cover-img.first %}
-            {{ post.cover-img[0].first.first }}
-          {% else %}
-            {{ post.cover-img }}
+          {% if page.hero.subtitle %}
+            <p class="hero-tagline">{{ page.hero.subtitle }}<span class="cursor" aria-hidden="true">_</span></p>
           {% endif %}
-        {% else %}
-        {% endif %}
-      {% endcapture %}
-      {% assign thumbnail=thumbnail | strip %}
 
-      {% if site.feed_show_excerpt == false %}
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-normal">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
+          {% if page.hero.lede %}
+            <p class="hero-lede">{{ page.hero.lede }}</p>
+          {% endif %}
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="{{ '/projects' | relative_url }}">
+              <i class="fas fa-folder-open" aria-hidden="true"></i> View projects
+            </a>
+            <a class="btn btn-ghost" href="{{ '/writeups' | relative_url }}">
+              <i class="fas fa-terminal" aria-hidden="true"></i> Read writeups
+            </a>
+            <a class="btn btn-ghost" href="{{ '/resume' | relative_url }}">
+              <i class="fas fa-file-lines" aria-hidden="true"></i> Résumé
+            </a>
+          </div>
+
+          <div class="hero-links">
+            {% if site.social-network-links.github %}
+              <a href="https://github.com/{{ site.social-network-links.github }}" target="_blank" rel="me noopener">
+                <i class="fab fa-github" aria-hidden="true"></i> GitHub
+              </a>
+            {% endif %}
+            {% if site.social-network-links.linkedin %}
+              <a href="https://linkedin.com/in/{{ site.social-network-links.linkedin }}" target="_blank" rel="me noopener">
+                <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+              </a>
+            {% endif %}
+            {% if site.social-network-links.email %}
+              <a href="mailto:{{ site.social-network-links.email }}">
+                <i class="fas fa-envelope" aria-hidden="true"></i> Email
+              </a>
+            {% endif %}
+          </div>
+        </div>
       </div>
-      {% endif %}
+    </div>
+  </section>
+
+  {% assign featured = site.projects | where: "featured", true | sort: "order" %}
+  <section class="home-section" id="projects">
+    <div class="container-md">
+      <div class="section-head">
+        <p class="section-label">// featured work</p>
+        <h2 class="section-title">Things I've built</h2>
+        <p class="section-note">A few projects that show how I think, not just what I can type.</p>
+      </div>
+
+      {% if featured.size > 0 %}
+        <div class="project-grid">
+          {% for project in featured %}
+            {% include project-card.html project=project %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="empty-state">Project case studies are on the way. For now, browse the code on
+          <a href="https://github.com/{{ site.social-network-links.github }}">GitHub</a>.</p>
       {% endif %}
 
-      <a href="{{ post.url | absolute_url }}">
-        <h2 class="post-title">{{ post.title | strip_html }}</h2>
-
-        {% if post.subtitle %}
-          <h3 class="post-subtitle">
-          {{ post.subtitle | strip_html }}
-          </h3>
-        {% endif %}
-      </a>
-
-      {% if post.author %}
-        <span>By <strong>{{ post.author | strip_html }}</strong></span>
-      {% endif %}
-      <p class="post-meta">
-        {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
-        Posted on {{ post.date | date: date_format }}
+      <p class="section-more">
+        <a href="{{ '/projects' | relative_url }}">All projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </p>
+    </div>
+  </section>
 
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-small">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
+  <section class="home-section" id="writeups">
+    <div class="container-md">
+      <div class="section-head">
+        <p class="section-label">// latest writeups</p>
+        <h2 class="section-title">Notes from the lab</h2>
+        <p class="section-note">CTF walkthroughs, experiments, and things I broke on purpose.</p>
       </div>
-      {% endif %}
 
-      {% unless site.feed_show_excerpt == false %}
-      {% if thumbnail != "" %}
-      <div class="post-image post-image-short">
-        <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-          <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-        </a>
-      </div>
-      {% endif %}
-
-      <div class="post-entry">
-        {% assign excerpt_length = site.excerpt_length | default: 50 %}
-        {{ post.excerpt | strip_html | truncatewords: excerpt_length }}
-        {% assign excerpt_word_count = post.excerpt | number_of_words %}
-        {% if post.content != post.excerpt or excerpt_word_count > excerpt_length %}
-          <a href="{{ post.url | absolute_url }}" class="post-read-more">[Read&nbsp;More]</a>
-        {% endif %}
-      </div>
-      {% endunless %}
-
-      {% if site.feed_show_tags != false and post.tags.size > 0 %}
-      <div class="blog-tags">
-        <span>Tags:</span>
-        <!-- role="list" needed so that `list-style: none` in Safari doesn't remove the list semantics -->
-        <ul class="d-inline list-inline" role="list">
-          {% for tag in post.tags %}
-          <li class="list-inline-item">
-            <a href="{{ '/tags' | absolute_url }}#{{- tag -}}">{{- tag -}}</a>
-          </li>
+      {% if site.posts.size > 0 %}
+        <ul class="writeup-list" role="list">
+          {% for post in site.posts limit: 3 %}
+            <li class="writeup-item">
+              <a href="{{ post.url | relative_url }}">
+                <time class="writeup-date" datetime="{{ post.date | date_to_xmlschema }}">
+                  {{ post.date | date: site.date_format }}
+                </time>
+                <div class="writeup-body">
+                  <h3 class="writeup-title">{{ post.title }}</h3>
+                  {% if post.subtitle %}
+                    <p class="writeup-summary">{{ post.subtitle }}</p>
+                  {% elsif post.excerpt %}
+                    <p class="writeup-summary">{{ post.excerpt | strip_html | truncatewords: 24 }}</p>
+                  {% endif %}
+                  {% if post.tags.size > 0 %}
+                    <ul class="tag-list" role="list">
+                      {% for tag in post.tags %}<li>{{ tag }}</li>{% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+                <i class="fas fa-arrow-right writeup-arrow" aria-hidden="true"></i>
+              </a>
+            </li>
           {% endfor %}
         </ul>
-      </div>
+      {% else %}
+        <p class="empty-state">The first writeup is in progress. In the meantime, the
+          <a href="{{ '/projects' | relative_url }}">projects page</a> is the best place to start.</p>
       {% endif %}
 
-    </article>
-  </li>
-  {% endfor %}
-</ul>
+      <p class="section-more">
+        <a href="{{ '/writeups' | relative_url }}">All writeups <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </p>
+    </div>
+  </section>
 
-{% if paginator.total_pages > 1 %}
-<ul class="pagination main-pager">
-  {% if paginator.previous_page %}
-  <li class="page-item previous">
-    <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">
-      <i class="fas fa-arrow-left" alt="Newer Posts"></i>
-      <span class="d-none d-sm-inline-block">Newer Posts</span>
-    </a>
-  </li>
+  {% if site.data.currently %}
+  <section class="home-section currently-section" id="currently">
+    <div class="container-md">
+      <div class="section-head">
+        <p class="section-label">// currently</p>
+        <h2 class="section-title">What I'm up to</h2>
+      </div>
+      <dl class="currently-list">
+        {% for item in site.data.currently %}
+          <div class="currently-item">
+            <dt>{{ item.label }}</dt>
+            <dd>{{ item.text }}</dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
+  </section>
   {% endif %}
-  {% if paginator.next_page %}
-  <li class="page-item next">
-    <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">
-      <span class="d-none d-sm-inline-block">Older Posts</span>
-      <i class="fas fa-arrow-right" alt="Older Posts"></i>
-    </a>
-  </li>
-  {% endif %}
-</ul>
-{% endif %}
+
+  <section class="home-section contact-section">
+    <div class="container-md">
+      <p class="section-label">// contact</p>
+      <h2 class="section-title">Let's build something, or break something.</h2>
+      <p class="section-note">
+        I'm open to internships, collaborations, and interesting problems.
+        The fastest way to reach me is email.
+      </p>
+      <a class="btn btn-primary" href="mailto:{{ site.social-network-links.email }}">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i> Say hello
+      </a>
+    </div>
+  </section>
+</main>

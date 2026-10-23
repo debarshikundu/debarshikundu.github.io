@@ -1,0 +1,24 @@
+---
+layout: page
+title: Projects
+subtitle: Things I've built, broken, and occasionally finished.
+---
+
+{% assign projects = site.projects | sort: "order" %}
+
+{% if projects.size > 0 %}
+  <div class="project-grid project-grid-page">
+    {% for project in projects %}
+      {% include project-card.html project=project %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty-state">Projects are being written up. For now, the code lives on
+    <a href="https://github.com/debarshikundu">GitHub</a>.</p>
+{% endif %}
+
+<p class="section-more">
+  <a href="https://github.com/debarshikundu" target="_blank" rel="noopener">
+    More experiments on GitHub <i class="fas fa-arrow-right" aria-hidden="true"></i>
+  </a>
+</p>

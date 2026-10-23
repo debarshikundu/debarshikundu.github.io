@@ -1,0 +1,37 @@
+{% assign project = include.project %}
+<article class="project-card">
+  <div class="project-card-top">
+    <h3 class="project-card-title">
+      <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+    </h3>
+    {% if project.status %}
+      <span class="project-status">{{ project.status }}</span>
+    {% endif %}
+  </div>
+
+  {% if project.summary %}
+    <p class="project-summary">{{ project.summary }}</p>
+  {% endif %}
+
+  {% if project.stack.size > 0 %}
+    <ul class="stack-list" role="list">
+      {% for item in project.stack %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+
+  <div class="project-card-links">
+    {% if project.repo %}
+      <a href="{{ project.repo }}" target="_blank" rel="noopener">
+        <i class="fab fa-github" aria-hidden="true"></i> Code
+      </a>
+    {% endif %}
+    {% if project.demo %}
+      <a href="{{ project.demo }}" target="_blank" rel="noopener">
+        <i class="fas fa-link" aria-hidden="true"></i> Live
+      </a>
+    {% endif %}
+    <a href="{{ project.url | relative_url }}">
+      Case study <i class="fas fa-arrow-right" aria-hidden="true"></i>
+    </a>
+  </div>
+</article>

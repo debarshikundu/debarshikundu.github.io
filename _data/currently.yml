@@ -1,0 +1,8 @@
+- label: "Building"
+  text: "This site, plus a small security tool I'll write up when it stops setting off my own antivirus."
+- label: "Learning"
+  text: "Python internals, Rust, and the parts of systems programming that don't fit in a semester."
+- label: "Practising"
+  text: "CTF challenges and lab machines — web exploitation and reverse engineering, mostly."
+- label: "Looking for"
+  text: "Software engineering or security internships where I can ship real things."

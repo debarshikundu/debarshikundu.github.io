@@ -1,0 +1,43 @@
+---
+layout: page
+title: Writeups
+subtitle: CTF walkthroughs, lab notes, and things I learned the hard way.
+---
+
+{% if site.posts.size > 0 %}
+  <ul class="writeup-list writeup-list-page" role="list">
+    {% for post in site.posts %}
+      <li class="writeup-item">
+        <a href="{{ post.url | relative_url }}">
+          <time class="writeup-date" datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: site.date_format }}
+          </time>
+          <div class="writeup-body">
+            <h3 class="writeup-title">{{ post.title }}</h3>
+            {% if post.subtitle %}
+              <p class="writeup-summary">{{ post.subtitle }}</p>
+            {% elsif post.excerpt %}
+              <p class="writeup-summary">{{ post.excerpt | strip_html | truncatewords: 32 }}</p>
+            {% endif %}
+            {% if post.tags.size > 0 %}
+              <ul class="tag-list" role="list">
+                {% for tag in post.tags %}<li>{{ tag }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <i class="fas fa-arrow-right writeup-arrow" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div class="empty-state">
+    <p><strong>No writeups published yet.</strong> The first one is in progress.</p>
+    <p>On the list: a retired Hack The Box machine, a small reverse-engineering exercise, and a note on building a safer command-line tool. Check back soon, or browse the
+      <a href="{{ '/projects' | relative_url }}">projects</a> in the meantime.</p>
+  </div>
+{% endif %}
+
+<p class="section-more">
+  <a href="{{ '/feed.xml' | relative_url }}"><i class="fas fa-rss" aria-hidden="true"></i> Subscribe via RSS</a>
+</p>

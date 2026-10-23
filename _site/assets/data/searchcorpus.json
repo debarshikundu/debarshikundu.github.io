@@ -1,0 +1,68 @@
+[ 
+ 
+ 
+{ 
+"title"    : "404 — Page not found", 
+"desc"     : "404 — Page not found", 
+"category" : "page", 
+"url"      : "/404.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "About", 
+"desc"     : "About", 
+"category" : "page", 
+"url"      : "/aboutme.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Debarshi Kundu", 
+"desc"     : "Debarshi Kundu", 
+"category" : "page", 
+"url"      : "/", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Projects", 
+"desc"     : "Projects", 
+"category" : "page", 
+"url"      : "/projects.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Résumé", 
+"desc"     : "Résumé", 
+"category" : "page", 
+"url"      : "/resume.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Tag Index", 
+"desc"     : "Tag Index", 
+"category" : "page", 
+"url"      : "/tags.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Uses", 
+"desc"     : "Uses", 
+"category" : "page", 
+"url"      : "/uses.html", 
+"date"     : "January 1, 1970" 
+}, 
+ 
+{ 
+"title"    : "Writeups", 
+"desc"     : "Writeups", 
+"category" : "page", 
+"url"      : "/writeups.html", 
+"date"     : "January 1, 1970" 
+} 
+ 
+]

@@ -166,6 +166,11 @@
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" />
   {% endif %}
 
+  {% assign favicon_svg_exists = site.static_files | where: "path", "/assets/img/favicon.svg" | size %}
+  {% if favicon_svg_exists == 1 %}
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/img/favicon.svg' | relative_url }}" />
+  {% endif %}
+
   {% if page.head-extra %}
     {% for file in page.head-extra %}
       {% include {{ file }} %}

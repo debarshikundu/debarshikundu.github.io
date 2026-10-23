@@ -1,0 +1,25 @@
+---
+layout: page
+---
+
+<div class="project-meta">
+  {% if page.status %}
+    <span class="meta-item"><span class="meta-label">Status</span> {{ page.status }}</span>
+  {% endif %}
+  {% if page.role %}
+    <span class="meta-item"><span class="meta-label">Role</span> {{ page.role }}</span>
+  {% endif %}
+  {% if page.stack.size > 0 %}
+    <span class="meta-item"><span class="meta-label">Stack</span> {{ page.stack | join: ", " }}</span>
+  {% endif %}
+  <span class="project-meta-links">
+    {% if page.repo %}
+      <a href="{{ page.repo }}" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+    {% endif %}
+    {% if page.demo %}
+      <a href="{{ page.demo }}" target="_blank" rel="noopener"><i class="fas fa-link" aria-hidden="true"></i> Live demo</a>
+    {% endif %}
+  </span>
+</div>
+
+{{ content }}
